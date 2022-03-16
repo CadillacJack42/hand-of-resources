@@ -65,4 +65,24 @@ describe('hand-of-resources routes', () => {
     const res = await request(app).get(`/api/v1/boxers/${boxer.id}`);
     expect(res.body).toEqual(expected);
   });
+
+  it('Should update a boxer by id', async () => {
+    const boxer = await Boxer.insert({
+      name: 'Buster Duglass',
+      wins: 38,
+      losses: 6,
+    });
+
+    const expected = {
+      id: expect.any(String),
+      name: 'Buster Douglas',
+      wins: 38,
+      losses: 6,
+    };
+
+    const res = await (
+      await request(app).patch(`/api/v1/boxers/${boxer.id}`)
+    ).send({ name: 'Buster Douglas' });
+    expect(res.body).toEqual(expected);
+  });
 });
