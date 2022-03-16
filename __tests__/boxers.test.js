@@ -50,4 +50,18 @@ describe('hand-of-resources routes', () => {
     const res = await request(app).get('/api/v1/boxers/boxers');
     expect(res.body).toEqual(expected);
   });
+
+  it('Should fetch a single boxer by id', async () => {
+    const boxer = Boxer.insert({
+      name: 'Mike Tyson',
+      wins: 50,
+      losses: 6,
+    });
+    const expected = {
+      ...boxer,
+    };
+
+    const res = await request(app).get(`/api/v1/boxers/${boxer.id}`);
+    expect(res.body).toEqual(expected);
+  });
 });
