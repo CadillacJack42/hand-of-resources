@@ -3,6 +3,8 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 
+const Boxer = require('../lib/models/Boxer');
+
 describe('hand-of-resources routes', () => {
   beforeEach(() => {
     return setup(pool);
@@ -23,5 +25,29 @@ describe('hand-of-resources routes', () => {
       wins: 50,
       losses: 6,
     });
+  });
+
+  it('Should fetch a list of all boxers', async () => {
+    const boxer = await Boxer.insert({
+      name: 'Mike Tyson',
+      wins: 50,
+      losses: 6,
+    });
+    const boxerTwo = await Boxer.insert({
+      name: 'Lennox Lewis',
+      wins: 41,
+      losses: 2,
+    });
+
+    const expected = [
+      {
+        ...boxer,
+      },
+      {
+        ...boxerTwo,
+      },
+    ];
+    const res = await request(app).get('/api/v1/boxers');
+    expect(res.body).toEqual(expected);
   });
 });
