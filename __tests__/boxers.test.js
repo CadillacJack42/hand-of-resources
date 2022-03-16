@@ -80,9 +80,9 @@ describe('hand-of-resources routes', () => {
       losses: 6,
     };
 
-    const res = await (
-      await request(app).patch(`/api/v1/boxers/${boxer.id}`)
-    ).send({ name: 'Buster Douglas' });
+    const res = await request(app)
+      .patch(`/api/v1/boxers/${boxer.id}`)
+      .send({ name: 'Buster Douglas' });
     expect(res.body).toEqual(expected);
   });
 });
