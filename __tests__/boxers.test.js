@@ -47,7 +47,7 @@ describe('hand-of-resources routes', () => {
         ...boxerTwo,
       },
     ];
-    const res = await request(app).get('/api/v1/boxers');
+    const res = await request(app).get('/api/v1/boxers/boxers');
     expect(res.body).toEqual(expected);
   });
 });
