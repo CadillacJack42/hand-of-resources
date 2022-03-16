@@ -52,7 +52,7 @@ describe('hand-of-resources routes', () => {
   });
 
   it('Should fetch a single boxer by id', async () => {
-    const boxer = Boxer.insert({
+    const boxer = await Boxer.insert({
       name: 'Mike Tyson',
       wins: 50,
       losses: 6,
@@ -60,6 +60,7 @@ describe('hand-of-resources routes', () => {
     const expected = {
       ...boxer,
     };
+    console.log('BOXER ID: ', boxer);
 
     const res = await request(app).get(`/api/v1/boxers/${boxer.id}`);
     expect(res.body).toEqual(expected);
