@@ -85,4 +85,17 @@ describe('hand-of-resources routes', () => {
       .send({ name: 'Buster Douglas' });
     expect(res.body).toEqual(expected);
   });
+
+  it('Should delete a boxer from the db based on id', async () => {
+    const boxer = await Boxer.insert({
+      name: 'Lennox Lewis',
+      wins: 41,
+      losses: 6,
+    });
+
+    const res = await request(app).delete(`/api/v1/${boxer.id}`);
+
+    expect(res.body).toEqual(boxer);
+    expect(await Boxer.getById(boxer.id)).toBeNull();
+  });
 });
