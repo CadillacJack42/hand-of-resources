@@ -6,5 +6,5 @@ CREATE TABLE boxers (
     id BIGINT GENERATED ALWAYS AS IDENTITY,
     name TEXT NOT NULL,
     wins INT NOT NULL,
-    losses INT NOT NULL,
-)
+    losses INT NOT NULL
+);
