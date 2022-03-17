@@ -3,7 +3,7 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 
-const Contact = require('../lib/models/Boxer');
+// const Contact = require('../lib/models/Contact');
 
 describe('string', () => {
   beforeEach(() => {
@@ -15,10 +15,11 @@ describe('string', () => {
   });
 
   it('Should create a new contact in the contacts table', async () => {
-    const res = request(app).post('/api/v1/contacts').send({
+    const res = await request(app).post('/api/v1/contacts').send({
       first_name: 'Hunter',
       last_name: 'Thompson',
     });
+    console.log('TEST RESPONSE', res.body);
 
     const expected = {
       first_name: 'Hunter',
