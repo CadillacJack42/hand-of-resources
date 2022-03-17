@@ -94,7 +94,7 @@ describe('string', () => {
       last_name: 'DaVinci',
     });
 
-    const res = await request(app).delete(`api/v1/contacts/${contact.id}`);
+    const res = await request(app).delete(`/api/v1/contacts/${contact.id}`);
     expect(res.body).toEqual(contact);
     expect(await Contact.getById(contact.id)).toBeNull();
   });
