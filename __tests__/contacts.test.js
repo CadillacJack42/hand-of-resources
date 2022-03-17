@@ -53,7 +53,7 @@ describe('string', () => {
   });
 
   it('Should fetch single contact based on id', async () => {
-    const contact = Contact.insert({
+    const contact = await Contact.insert({
       first_name: 'Nikola',
       last_name: 'Tesla',
     });
@@ -62,7 +62,7 @@ describe('string', () => {
       id: expect.any(String),
       user_id: expect.any(String),
       first_name: 'Nikola',
-      last_name: 'Telsa',
+      last_name: 'Tesla',
     };
 
     const res = await request(app).get(`/api/v1/contacts/${contact.id}`);
