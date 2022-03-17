@@ -87,4 +87,15 @@ describe('string', () => {
       .send({ first_name: 'Elon', last_name: 'Musk' });
     expect(res.body).toEqual(expected);
   });
+
+  it('Should delete contact based on id', async () => {
+    const contact = await Contact.insert({
+      first_name: 'Leonardo',
+      last_name: 'DaVinci',
+    });
+
+    const res = await request(app).delete(`api/v1/contacts/${contact.id}`);
+    expect(res.body).toEqual(contact);
+    expect(await Contact.getById(contact.id)).toBeNull();
+  });
 });
