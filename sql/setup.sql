@@ -1,6 +1,7 @@
 -- Use this file to define your SQL tables
 -- The SQL in this file will be executed when you run `npm run setup-db`
-DROP TABLE IF EXISTS boxers;
+DROP TABLE IF EXISTS boxers, contacts;
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp"
 
 CREATE TABLE boxers (
     id BIGINT GENERATED ALWAYS AS IDENTITY,
@@ -8,3 +9,11 @@ CREATE TABLE boxers (
     wins INT NOT NULL,
     losses INT NOT NULL
 );
+
+
+CREATE TABLE contacts (
+    id BIGINT GENERATED ALWAYS AS IDENTITY,
+    user_id uuid DEFAULT uuid_generate_v4 (),
+    first_name VARCHAR NOT NULL,
+    last_name VARCHAR NOT NULL,
+)
