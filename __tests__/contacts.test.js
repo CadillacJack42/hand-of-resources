@@ -3,7 +3,7 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 
-// const Contact = require('../lib/models/Contact');
+const Contact = require('../lib/models/Contact');
 
 describe('string', () => {
   beforeEach(() => {
@@ -27,6 +27,28 @@ describe('string', () => {
       id: expect.any(String),
       user_id: expect.any(String),
     };
+    expect(res.body).toEqual(expected);
+  });
+
+  it('Should fetch a list of contacts', async () => {
+    const contact = await Contact.insert({
+      first_name: 'Cadillac',
+      last_name: 'Jack',
+    });
+    const otherContact = await Contact.insert({
+      first_name: 'Albert',
+      last_name: 'Einstein',
+    });
+
+    const expected = [
+      {
+        ...contact,
+      },
+      {
+        ...otherContact,
+      },
+    ];
+    const res = await request(app).get('/api/v1/contacts/contacts');
     expect(res.body).toEqual(expected);
   });
 });
