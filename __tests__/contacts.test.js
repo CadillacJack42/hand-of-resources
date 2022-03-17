@@ -68,4 +68,23 @@ describe('string', () => {
     const res = await request(app).get(`/api/v1/contacts/${contact.id}`);
     expect(res.body).toEqual(expected);
   });
+
+  it('Should update contact info based on user id', async () => {
+    const contact = await Contact.insert({
+      first_name: 'Eln',
+      last_name: 'Msk',
+    });
+
+    const expected = {
+      id: expect.any(String),
+      user_id: expect.any(String),
+      first_name: 'Elon',
+      last_name: 'Musk',
+    };
+
+    const res = await request(app)
+      .patch(`/api/v1/contacts/${contact.id}`)
+      .send({ first_name: 'Elon', last_name: 'Musk' });
+    expect(res.body).toEqual(expected);
+  });
 });
