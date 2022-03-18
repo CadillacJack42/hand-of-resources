@@ -73,18 +73,16 @@ describe('Cars tests', () => {
       model: 'STS-V',
       manual_transmission: false,
     });
-    const updatedCar = {
-      manual_transmission: true,
-    };
+
     const expected = {
       id: expect.any(String),
       make: 'Cadillac',
       model: 'STS-V',
       manual_transmission: true,
     };
-    const res = await (
-      await request(app).patch(`/api/v1/cars/${car.id}`)
-    ).send(updatedCar);
+    const res = await request(app)
+      .patch(`/api/v1/cars/${car.id}`)
+      .send({ manual_transmission: true });
     expect(res.body).toEqual(expected);
   });
 });
