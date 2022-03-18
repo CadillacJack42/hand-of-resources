@@ -92,7 +92,6 @@ describe('hand-of-resources routes', () => {
       wins: 41,
       losses: 6,
     });
-    console.log('TEST BOXER: ', boxer);
 
     const res = await request(app).delete(`/api/v1/boxers/${boxer.id}`);
 
