@@ -3,7 +3,7 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 
-// const Car = require('../lib/models/Car');
+const Car = require('../lib/models/Car');
 
 describe('Cars tests', () => {
   beforeEach(() => {
