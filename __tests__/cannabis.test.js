@@ -53,4 +53,20 @@ describe('cannabis route', () => {
     const res = await request(app).get(`/api/v1/cannabis/${strain.id}`);
     expect(res.body).toEqual(expected);
   });
+
+  it('Should update strain by id', async () => {
+    const strain = await Strain.insert({ strain: 'UK Cheese' });
+
+    const expected = {
+      id: expect.any(String),
+      created_at: expect.any(String),
+      strain: 'UK Cheese',
+    };
+
+    const res = await request(app)
+      .patch(`/api/v1/cannabis/${strain.id}`)
+      .send({ strain: 'Blue Cheese' });
+
+    expect(res.body).toEqual(expected);
+  });
 });
