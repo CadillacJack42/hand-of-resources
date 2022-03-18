@@ -92,7 +92,7 @@ describe('hand-of-resources routes', () => {
       created_at: expect.any(String),
       user_id: expect.any(String),
       username: 'Bobby',
-      email: 'bobby@roberts.com',
+      email: 'bobby@robert.com',
     };
 
     const res = await request(app)
