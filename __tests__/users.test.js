@@ -41,10 +41,18 @@ describe('hand-of-resources routes', () => {
     });
     const expected = [
       {
-        ...user,
+        id: expect.any(String),
+        created_at: expect.any(String),
+        user_id: expect.any(String),
+        username: 'Yo Mama',
+        email: 'yomama@jokes.com',
       },
       {
-        ...userTwo,
+        id: expect.any(String),
+        created_at: expect.any(String),
+        user_id: expect.any(String),
+        username: 'Yo Yo Ma',
+        email: 'yoyomami@jokes.com',
       },
     ];
 
