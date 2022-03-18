@@ -63,7 +63,7 @@ describe('Cars tests', () => {
       model: 'DTS',
       manual_transmission: false,
     });
-    const res = request(app).get(`/api/v1/cars/${car.id}`);
+    const res = await request(app).get(`/api/v1/cars/${car.id}`);
     expect(res.body).toEqual(car);
   });
 });
