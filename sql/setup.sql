@@ -30,3 +30,11 @@ CREATE TABLE cannabis (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     strain TEXT NOT NULL
 );
+
+CREATE TABLE users (
+    id BIGINT GENERATED ALWAYS AS IDENTITY,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    user_id uuid DEFAULT uuid_generate_v4 (),
+    username TEXT NOT NULL,
+    email TEXT NOT NULL
+);
