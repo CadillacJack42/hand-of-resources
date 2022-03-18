@@ -69,4 +69,18 @@ describe('cannabis route', () => {
 
     expect(res.body).toEqual(expected);
   });
+
+  it('Should delete strain by id', async () => {
+    const strain = await Strain.insert({ strain: 'Memory Loss' });
+    const expected = {
+      id: expect.any(String),
+      created_at: expect.any(String),
+      strain: 'Memory Loss',
+    };
+
+    const res = await request(app).delete(`/api/v1/cannabis/${strain.id}`);
+
+    expect(res.body).toEqual(expected);
+    expect(await Strain.getById(strain.id)).toBeNull();
+  });
 });
