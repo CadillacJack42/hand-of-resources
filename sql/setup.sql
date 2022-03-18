@@ -1,6 +1,6 @@
 -- Use this file to define your SQL tables
 -- The SQL in this file will be executed when you run `npm run setup-db`
-DROP TABLE IF EXISTS boxers, contacts, cars;
+DROP TABLE IF EXISTS boxers, contacts, cars, cannabis;
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 CREATE TABLE boxers (
@@ -24,3 +24,11 @@ CREATE TABLE cars (
     model TEXT NOT NULL,
     manual_transmission BOOLEAN
 );
+
+CREATE TABLE cannabis (
+    id BIGINT GENERATED ALWAYS AS IDENTITY,
+    created_at TIMESTAMPTZ,
+    strain TEXT NOT NULL     
+);
+
+INSERT INTO cannabis (strain) VALUES ('kush');
