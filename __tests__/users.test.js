@@ -77,4 +77,28 @@ describe('hand-of-resources routes', () => {
     const res = await request(app).get(`/api/v1/users/${user.id}`);
     expect(res.body).toEqual(expected);
   });
+
+  it('Should update user info based on user id', async () => {
+    const user = await User.insert({
+      username: 'Bob',
+      email: 'bob@bob.com',
+    });
+    const updatedInfo = {
+      username: 'Bobby',
+      email: 'bobby@robert.com',
+    };
+    const expected = {
+      id: expect.any(String),
+      created_at: expect.any(String),
+      user_id: expect.any(String),
+      username: 'Bobby',
+      email: 'bobby@roberts.com',
+    };
+
+    const res = await request(app)
+      .patch(`/api/v1/users/${user.id}`)
+      .send(updatedInfo);
+
+    expect(res.body).toEqual(expected);
+  });
 });
