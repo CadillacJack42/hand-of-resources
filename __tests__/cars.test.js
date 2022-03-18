@@ -30,4 +30,30 @@ describe('Cars tests', () => {
 
     expect(res.body).toEqual(expected);
   });
+
+  it('Should fetch a list of all cars in db', async () => {
+    const car = await Car.insert({
+      make: 'Cadillac',
+      model: 'CT6',
+      manual_transmission: false,
+    });
+
+    const carTwo = await Car.insert({
+      make: 'Cadillac',
+      model: 'El Miraj',
+      manual_transmission: false,
+    });
+
+    const expected = [
+      {
+        ...car,
+      },
+      {
+        ...carTwo,
+      },
+    ];
+
+    const res = await request(app).get('/api/v1/cars/cars');
+    expect(res.body).toEqual(expected);
+  });
 });
