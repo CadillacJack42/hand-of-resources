@@ -40,4 +40,17 @@ describe('cannabis route', () => {
     const res = await request(app).get('/api/v1/cannabis');
     expect(res.body).toEqual(expected);
   });
+
+  it('Should fetch a single strain based on id', async () => {
+    const strain = await Strain.insert({ strain: 'Duct Tape' });
+
+    const expected = {
+      id: expect.any(String),
+      created_at: expect.any(String),
+      strain: 'Duct Tape',
+    };
+
+    const res = await request(app).get(`/api/v1/cannabis/${strain.id}`);
+    expect(res.body).toEqual(expected);
+  });
 });
