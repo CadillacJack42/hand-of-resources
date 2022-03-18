@@ -18,14 +18,14 @@ describe('Cars tests', () => {
     const res = await request(app).post('/api/v1/cars').send({
       make: 'Cadillac',
       model: 'CT6',
-      manual_transmission: true,
+      manual_transmission: false,
     });
 
     const expected = {
       id: expect.any(String),
       make: 'Cadillac',
       model: 'CT6',
-      manual_transmission: true,
+      manual_transmission: false,
     };
 
     expect(res.body).toEqual(expected);
