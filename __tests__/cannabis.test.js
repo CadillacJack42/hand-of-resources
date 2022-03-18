@@ -27,7 +27,17 @@ describe('cannabis route', () => {
   });
 
   it('Should fetch all strains from cannabis table', async () => {
+    await Strain.insert({
+      strain: 'Pineapple Express',
+    });
+    const expected = [
+      {
+        id: expect.any(String),
+        created_at: expect.any(String),
+        strain: 'Pineapple Express',
+      },
+    ];
     const res = await request(app).get('/api/v1/cannabis');
-    expect(res.body).toEqual({ strain: 'og kush' });
+    expect(res.body).toEqual(expected);
   });
 });
