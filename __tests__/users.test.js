@@ -31,11 +31,11 @@ describe('hand-of-resources routes', () => {
   });
 
   it('Should fetch all users from db', async () => {
-    const user = await User.insert({
+    await User.insert({
       username: 'Yo Mama',
       email: 'yomama@jokes.com',
     });
-    const userTwo = await User.insert({
+    await User.insert({
       username: 'Yo Yo Ma',
       email: 'yoyomami@jokes.com',
     });
@@ -57,6 +57,24 @@ describe('hand-of-resources routes', () => {
     ];
 
     const res = await request(app).get('/api/v1/users');
+    expect(res.body).toEqual(expected);
+  });
+
+  it('Should fetch single user by id', async () => {
+    const user = await User.insert({
+      username: 'Big Poppa',
+      email: 'notorious@big.com',
+    });
+
+    const expected = {
+      id: expect.any(String),
+      created_at: expect.any(String),
+      user_id: expect.any(String),
+      username: 'Big Poppa',
+      email: 'notorious@big.com',
+    };
+
+    const res = await request(app).get(`/api/v1/users/${user.id}`);
     expect(res.body).toEqual(expected);
   });
 });
