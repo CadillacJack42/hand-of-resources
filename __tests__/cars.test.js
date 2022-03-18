@@ -53,7 +53,7 @@ describe('Cars tests', () => {
       },
     ];
 
-    const res = await request(app).get('/api/v1/cars/cars');
+    const res = await request(app).get('/api/v1/cars');
     expect(res.body).toEqual(expected);
   });
 
@@ -65,5 +65,24 @@ describe('Cars tests', () => {
     });
     const res = await request(app).get(`/api/v1/cars/${car.id}`);
     expect(res.body).toEqual(car);
+  });
+
+  it('Should update a car based on id', async () => {
+    const car = await Car.insert({
+      make: 'Cadillac',
+      model: 'STS-V',
+      manual_transmission: false,
+    });
+    const updatedCar = {
+      manual_transmission: true,
+    };
+    const expected = {
+      id: expect.any(String),
+      make: 'Cadillac',
+      model: 'STS-V',
+      manual_transmission: true,
+    };
+    const res = await Car.update(car.id, updatedCar);
+    expect(res.body).toEqual(expected);
   });
 });
