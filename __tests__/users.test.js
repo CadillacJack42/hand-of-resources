@@ -101,4 +101,24 @@ describe('hand-of-resources routes', () => {
 
     expect(res.body).toEqual(expected);
   });
+
+  it('Should delete user from db based on user id', async () => {
+    const user = await User.insert({
+      username: 'Tupac',
+      email: 'still@live.com',
+    });
+
+    const expected = {
+      id: expect.any(String),
+      created_at: expect.any(String),
+      user_id: expect.any(String),
+      username: 'Tupac',
+      email: 'still@live.com',
+    };
+
+    const res = await request(app).delete(`/api/v1/users/${user.id}`);
+
+    expect(res.body).toEqual(expected);
+    expect(await User.getUserById(user.id)).toBeNull();
+  });
 });
