@@ -56,4 +56,14 @@ describe('Cars tests', () => {
     const res = await request(app).get('/api/v1/cars/cars');
     expect(res.body).toEqual(expected);
   });
+
+  it('Should fetch a single car by id', async () => {
+    const car = await Car.insert({
+      make: 'Cadillac',
+      model: 'DTS',
+      manual_transmission: false,
+    });
+    const res = request(app).get(`/api/v1/cars/${car.id}`);
+    expect(res.body).toEqual(car);
+  });
 });
