@@ -85,4 +85,16 @@ describe('Cars tests', () => {
       .send({ manual_transmission: true });
     expect(res.body).toEqual(expected);
   });
+
+  it('Should delete a car by id', async () => {
+    const car = await Car.insert({
+      make: 'Cadillac',
+      model: '62',
+      manual_transmission: false,
+    });
+
+    const res = await request(app).delete(`/api/v1/cars/${car.id}`);
+    expect(res.body).toEqual(car);
+    expect(await Car.getCarById(car.id)).toBeNull();
+  });
 });
