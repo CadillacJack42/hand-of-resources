@@ -27,8 +27,6 @@ CREATE TABLE cars (
 
 CREATE TABLE cannabis (
     id BIGINT GENERATED ALWAYS AS IDENTITY,
-    created_at TIMESTAMPTZ,
-    strain TEXT NOT NULL     
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    strain TEXT NOT NULL
 );
-
-INSERT INTO cannabis (strain) VALUES ('kush');
