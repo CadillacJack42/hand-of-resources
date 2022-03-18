@@ -60,7 +60,7 @@ describe('cannabis route', () => {
     const expected = {
       id: expect.any(String),
       created_at: expect.any(String),
-      strain: 'UK Cheese',
+      strain: 'Blue Cheese',
     };
 
     const res = await request(app)
