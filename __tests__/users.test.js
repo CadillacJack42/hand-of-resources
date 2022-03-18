@@ -29,4 +29,26 @@ describe('hand-of-resources routes', () => {
 
     expect(res.body).toEqual(expected);
   });
+
+  it('Should fetch all users from db', async () => {
+    const user = await User.insert({
+      username: 'Yo Mama',
+      email: 'yomama@jokes.com',
+    });
+    const userTwo = await User.insert({
+      username: 'Yo Yo Ma',
+      email: 'yoyomami@jokes.com',
+    });
+    const expected = [
+      {
+        ...user,
+      },
+      {
+        ...userTwo,
+      },
+    ];
+
+    const res = await request(app).get('/api/v1/users');
+    expect(res.body).toEqual(expected);
+  });
 });
