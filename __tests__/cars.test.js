@@ -82,7 +82,9 @@ describe('Cars tests', () => {
       model: 'STS-V',
       manual_transmission: true,
     };
-    const res = await Car.update(car.id, updatedCar);
+    const res = await (
+      await request(app).patch(`/api/v1/cars/${car.id}`)
+    ).send(updatedCar);
     expect(res.body).toEqual(expected);
   });
 });
